@@ -1,46 +1,138 @@
-# Getting Started with Create React App
+# React Course TypeScript Props
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Chapter 1 Defining props for components
 
-## Available Scripts
+```typescript
+    App.tsx
 
-In the project directory, you can run:
+    import Header from './components/Header';
 
-### `npm start`
+    function App() {
+    return (
+        <div>
+        <Header title="Dashboard"/>
+        </div>
+    );
+    }
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    export default App;
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```typescript
+    Header.tsx
 
-### `npm test`
+    interface HeaderProps {
+    title: string;
+    }
+    export default function Header({ title }: HeaderProps) {
+        return <>
+            <div>{title}</div>
+        </>
+    }
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Chapter 2 Optional props
 
-### `npm run build`
+```typescript
+    App.tsx
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    import Header from './components/Header';
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    function App() {
+    return (
+        <div>
+        <Header title="Dashboard"/>
+        </div>
+    );
+    }
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    export default App;
+```
 
-### `npm run eject`
+or
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```typescript
+    App.tsx
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    import Header from './components/Header';
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    function App() {
+    return (
+        <div>
+        <Header title="Dashboard" optionalText="Optional Text" />
+        </div>
+    );
+    }
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    export default App;
+```
 
-## Learn More
+```typescript
+    Header.tsx
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    interface HeaderProps {
+    title: string;
+    optionalText?: string
+    }
+    export default function Header({ title, optionalText }: HeaderProps) {
+        return <>
+            <div>{title}</div>
+            {optionalText && <div>{optionalText}</div>}
+        </>
+    }   
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Chapter 3 Default props
+
+```typescript
+    App.tsx
+
+    import Header from './components/Header';
+
+    function App() {
+    return (
+        <div>
+        <Header title="Dashboard"/>
+        </div>
+    );
+    }
+
+    export default App;
+```
+
+or
+
+```typescript
+    App.tsx
+
+    import Header from './components/Header';
+
+    function App() {
+    return (
+        <div>
+        <Header title="Dashboard" optionalText="Optional Text" />
+        </div>
+    );
+    }
+
+    export default App;
+```
+
+```typescript
+    Header.tsx
+
+    interface HeaderProps {
+    title: string;
+    optionalText?: string
+    }
+    export default function Header({ title, optionalText = "Default Props" }: HeaderProps) {
+        return <>
+            <div>{title}</div>
+            {optionalText && <div>{optionalText}</div>}
+        </>
+    }   
+```
+
+## Differences Between Type Aliases and Interfaces
+
+[Type Aliases or Interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)
